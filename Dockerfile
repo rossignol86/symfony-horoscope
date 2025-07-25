@@ -1,29 +1,29 @@
-# Utilise l’image PHP officielle avec Apache
-FROM php:8.2-apache
+# Utilise l'image PHP 8.2 avec Apache et Composer intégrés
+FROM composer:2.7 AS build
 
-# Installe les extensions nécessaires à Symfony
-RUN apt-get update && apt-get install -y \
-    libicu-dev \
-    libpq-dev \
-    unzip \
-    git \
-    zip \
-    && docker-php-ext-install intl pdo pdo_pgsql opcache
+WORKDIR /app
 
-# Active mod_rewrite pour Apache (nécessaire pour Symfony)
-RUN a2enmod rewrite
+# Copie les fichiers du projet dans l'image
+COPY . .
 
-# ✅ Télécharge et installe Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-# Copie les fichiers de ton projet dans le conteneur
-COPY . /var/www/html
-
-# Définit le répertoire de travail
-WORKDIR /var/www/html
-
-# Installe les dépendances PHP avec Composer
+# Installe les dépendances sans les packages de dev
 RUN composer install --no-dev --optimize-autoloader
 
-# Expose le port 80 (Apache)
+
+# Étape finale : PHP avec Apache
+FROM php:8.2-apache
+
+# Active mod_rewrite (nécessaire pour Symfony)
+RUN a2enmod rewrite
+
+# Copie les fichiers depuis l'étape précédente
+COPY --from=build /app /var/www/html
+
+# Change le dossier de travail
+WORKDIR /var/www/html
+
+# Configure Apache pour pointer vers /public
+RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|' /etc/apache2/sites-available/000-default.conf
+
+# Expose le port 80
 EXPOSE 80
