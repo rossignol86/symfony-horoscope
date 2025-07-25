@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Signe{% endblock %}
+
+{% block body %}
+    <h1>Signe</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ signe.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ signe.nom }}</td>
+            </tr>
+            <tr>
+                <th>Element</th>
+                <td>{{ signe.element }}</td>
+            </tr>
+            <tr>
+                <th>Symbole</th>
+                <td>{{ signe.symbole }}</td>
+            </tr>
+            <tr>
+                <th>DateDebut</th>
+                <td>{{ signe.dateDebut ? signe.dateDebut|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DateFin</th>
+                <td>{{ signe.dateFin ? signe.dateFin|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_signe_index') }}">back to list</a>
+
+    <a href="{{ path('app_signe_edit', {'id': signe.id}) }}">edit</a>
+
+    {{ include('signe/_delete_form.html.twig') }}
+{% endblock %}

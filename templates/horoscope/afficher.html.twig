@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% bloc title %}horoscope delete{% endbloc %}
+
+{% bloc body %}
+
+<link rel="stylesheet" href="../../assets/styles/style.css">
+
+<h1> Horosocope du jour pour le signe {{ signe.nom }}</h1>
+
+<p><strong> Symbole : </strong> {{ signe.symbole }}</p>
+<p><strong> Élément : </strong> {{ signe.element }}</p>
+<p><strong> Période : </strong> {{ signe.dateDebut|date('d M') }} au {{ signe.dateFin|date('d M') }} </p>
+
+<hr>
+
+{% if Horoscope %}
+    <h2>Horoscope du {{ horoscope.dateDuJour|date('d/m/Y') }}</h2>
+    <p>{{ horoscope.contenu }}</p>
+{% else %}
+    <p>Aucun horoscope disponible pour aujourd'hui</p>
+{% endif %}
+
+{% endbloc %}

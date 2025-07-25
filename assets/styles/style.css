@@ -1,0 +1,49 @@
+body {
+    background-color: skyblue;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin: 0 auto;
+    color: #333;
+}
+
+header{
+    background-color: bisque;
+    padding: 1rem;
+}
+
+nav ul{
+    list-style: none;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a{
+    padding: 2rem;
+    max-width: 900px;
+    margin: auto;
+}
+
+
+
+/* body */
+h1{
+    color: brown;
+}
+
+hr{
+    margin: 1rem 0;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+
+
+/* footer */
+footer{
+    background-color: #ddd;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+}

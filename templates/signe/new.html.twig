@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Signe{% endblock %}
+
+{% block body %}
+    <h1>Create new Signe</h1>
+
+    {{ include('signe/_form.html.twig') }}
+
+    <a href="{{ path('app_signe_index') }}">back to list</a>
+{% endblock %}

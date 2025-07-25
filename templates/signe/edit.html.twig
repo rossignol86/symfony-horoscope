@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Signe{% endblock %}
+
+{% block body %}
+    <h1>Edit Signe</h1>
+
+    {{ include('signe/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_signe_index') }}">back to list</a>
+
+    {{ include('signe/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% bloc title %}horoscope delete{% endbloc %}
+
+{% bloc body %}
+<form method="post" action="{{ path('app_horoscope_delete', {'id': horoscope.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ horoscope.id) }}">
+    <button class="btn">Delete</button>
+</form>
+{% endbloc %}

@@ -1,0 +1,38 @@
+<h1>Liste des Signes du Zodiaque</h1>
+
+<table>
+    
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Élément</th>
+            <th>Symbole</th>
+            <th>Dates</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    {% for signe in signes %}
+    <tr>
+        <td>{{ signe.nom }}</td>
+        <td>{{ signe.element }}</td>
+        <td>{{ signe.symbole }}</td>
+        <td>Du {{ signe.dateDebut|date('d/m') }} au {{ signe.dateFin|date('d/m') }}</td>
+        <td>
+            <a href="{{ path('signe_show', {'id': signe. id}) }}"> Voir </a>
+            <a href="{{ path('signe_edit', {'id': signe.id}) }}"> Modifier </a>
+            <form method="post" action="{{ path( 'signe_delete', {'id': signe. id}) }}" style="display: inline-block">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ signe.id) }}">
+            <button type="submit" onclick="return confirm( 'Confirmer la suppression ?' ) "> Supprimer </button>
+            </form>
+        </td>
+    </tr>
+    {% else %}
+    <tr>
+        <td colspan="5">Aucun signe enregistré.</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>

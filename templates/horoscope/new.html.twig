@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Horoscope{% endblock %}
+
+{% block body %}
+    <h1>Create new Horoscope</h1>
+
+    {{ include('horoscope/_form.html.twig') }}
+
+    <a href="{{ path('app_horoscope_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue !{% endblock %}
+
+{% block body %}
+    <h1>Bienvenue dans votre Horoscope quotidien !</h1>
+
+    <p> Consultez l'horoscope de votre signe chaque jour en ligne.</p>
+    
+    <a href="{{ path('signe_index') }}">Voir la liste des signes</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>DateDuJour</th>
+                <th>Contenu</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for horoscope in horoscopes %}
+            <tr>
+                <td>{{ horoscope.id }}</td>
+                <td>{{ horoscope.dateDuJour ? horoscope.dateDuJour|date('Y-m-d') : '' }}</td>
+                <td>{{ horoscope.contenu }}</td>
+                <td>
+                    <a href="{{ path('app_horoscope_show', {'id': horoscope.id}) }}">show</a>
+                    <a href="{{ path('app_horoscope_edit', {'id': horoscope.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_horoscope_new') }}">Create new</a>
+{% endblock %}
